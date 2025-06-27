@@ -42,6 +42,7 @@ metadata:
   name: nfs-server
   namespace: default
 spec:
+  progressDeadlineSeconds: 600
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -52,9 +53,7 @@ spec:
       maxUnavailable: 25%
     type: RollingUpdate
   replicas: 1
-  selector:
-    matchLabels:
-      app: nfs-server
+  template:
     metadata:
       labels:
         svc: harvester-nfs-server
