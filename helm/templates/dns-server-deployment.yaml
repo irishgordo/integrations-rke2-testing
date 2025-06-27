@@ -21,8 +21,9 @@ spec:
   replicas: 1
   template:
     metadata:
-      svc: harvester-qa-dns-server
-      workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server
+      labels:
+        svc: harvester-qa-dns-server
+        workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server
       namespace: default
     spec:
       affinity: {}
