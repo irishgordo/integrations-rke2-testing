@@ -30,20 +30,20 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
       containers:
-        - name: harvester-cunnie-dns
-            image: cunnie/sslip.io-dns-server:4.0.0
-            args:
-            - -nameservers
-            - harvester-internal-hal.io
-            resources:
-            requests:
-                cpu: 200m
-                memory: 200Mi
-            limits:
-                cpu: 400m
-                memory: 400Mi
-            ports:
-            - containerPort: 53
+      - name: harvester-cunnie-dns
+        image: cunnie/sslip.io-dns-server:4.0.0
+        args:
+        - -nameservers
+        - harvester-internal-hal.io
+        resources:
+        requests:
+            cpu: 200m
+            memory: 200Mi
+        limits:
+            cpu: 400m
+            memory: 400Mi
+        ports:
+        - containerPort: 53
 ---
 apiVersion: v1
 kind: Service
