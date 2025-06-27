@@ -66,8 +66,8 @@ spec:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - name: dnsserverlbairgap[]
-      nodePort: 30002
+    - name: dnsserverlbairgap
+      nodePort: 30003
       port: 53
       protocol: UDP
       targetPort: 53
