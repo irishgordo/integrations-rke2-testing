@@ -67,7 +67,7 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
     - name: ngx1lb
-      nodePort: 30053
+      nodePort: 30001
       port: 53
       protocol: UDP
       targetPort: 53
