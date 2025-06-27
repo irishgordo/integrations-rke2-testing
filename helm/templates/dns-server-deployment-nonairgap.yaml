@@ -85,7 +85,7 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
     - name: dnsserverlb
-      nodePort: 30007
+      nodePort: 30009
       port: 53
       protocol: UDP
       targetPort: 53
