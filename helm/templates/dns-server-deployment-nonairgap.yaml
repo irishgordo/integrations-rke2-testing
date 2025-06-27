@@ -41,6 +41,10 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: integration-addresses
+        configMap:
+          name: harvester-dns-server-cm
       containers:
       - name: harvester-dns-dnsmasq
         image: dockurr/dnsmasq:2.9.1
@@ -52,10 +56,6 @@ spec:
         volumeMounts:
         - name: integration-addresses
           mountPath: /etc/dnsmasq.d
-        volumes:
-        - name: integration-addresses
-          configMap:
-            name: harvester-dns-server-cm
         resources:
             requests:
                 cpu: 200m
