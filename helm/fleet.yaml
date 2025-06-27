@@ -1,0 +1,9 @@
+namespace: default
+
+helm:
+  releaseName: harvester-qa-integrations
+  chart: ""
+  repo: ""
+  version: ""
+  force: false
+  timeoutSeconds: 0
