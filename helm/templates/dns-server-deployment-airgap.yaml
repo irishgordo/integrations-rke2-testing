@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: harvester-dns-server
+  name: harvester-dns-server-airgap
   annotations:
-    field.cattle.io/description: harvester-dns-server deployment
+    field.cattle.io/description: harvester-dns-server-airgap deployment
   labels:
-    workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server
+    workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server-airgap
   namespace: default
 spec:
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server
+      workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server-airgap
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,8 +22,8 @@ spec:
   template:
     metadata:
       labels:
-        svc: harvester-qa-dns-server
-        workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server
+        svc: harvester-qa-dns-server-airgap
+        workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-dns-server-airgap
       namespace: default
     spec:
       affinity: {}
@@ -53,10 +53,10 @@ kind: Service
 metadata:
   annotations:
     cloudprovider.harvesterhci.io/ipam: dhcp
-    field.cattle.io/description: ipam lb harvester-dns-server
+    field.cattle.io/description: ipam lb harvester-dns-server-airgap
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
-  name: harvester-dns-server-lb
+  name: harvester-dns-server-lb-airgap
   namespace: default
 spec:
   allocateLoadBalancerNodePorts: true
@@ -72,7 +72,7 @@ spec:
       protocol: UDP
       targetPort: 53
   selector:
-    svc: harvester-qa-dns-server
+    svc: harvester-qa-dns-server-airgap
   sessionAffinity: None
   type: LoadBalancer
 ---
