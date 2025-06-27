@@ -74,7 +74,7 @@ metadata:
     field.cattle.io/description: ipam lb harvester-dns-server
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
-  name: harvester-dns-server-lb-airgap
+  name: harvester-dns-server-lb
   namespace: default
 spec:
   allocateLoadBalancerNodePorts: true
@@ -84,13 +84,13 @@ spec:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - name: ngx1lb
+    - name: dnsserverlb
       nodePort: 30007
       port: 53
       protocol: UDP
       targetPort: 53
   selector:
-    svc: harvester-qa-dns-server-airgap
+    svc: harvester-qa-dns-server
   sessionAffinity: None
   type: LoadBalancer
 ---

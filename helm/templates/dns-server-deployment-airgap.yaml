@@ -66,8 +66,8 @@ spec:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - name: ngx1lb
-      nodePort: 30001
+    - name: dnsserverlbairgap[]
+      nodePort: 30002
       port: 53
       protocol: UDP
       targetPort: 53
