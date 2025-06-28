@@ -35,7 +35,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nfs-server
+  name: harvester-nfs-server
   namespace: default
   annotations:
     field.cattle.io/description: harvester-nfs-server deployment
