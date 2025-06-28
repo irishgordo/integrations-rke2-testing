@@ -71,17 +71,17 @@ spec:
           image: itsthenetwork/nfs-server-alpine:latest
           env:
           - name: SHARED_DIRECTORY
-              value: "/exports"
+            value: "/exports"
           volumeMounts:
           - mountPath: /exports
-              name: nfs-vol
+            name: nfs-vol
           resources:
-          requests:
-          cpu: 200m
-          memory: 200Mi
-          limits:
-          cpu: 400m
-          memory: 400Mi
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 400m
+              memory: 400Mi
           stdin: true
           tty: true
           terminationMessagePath: /dev/termination-log
