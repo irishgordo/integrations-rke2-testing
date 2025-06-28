@@ -80,8 +80,8 @@ spec:
             cpu: 200m
             memory: 200Mi
           limits:
-            cpu: 400m
-            memory: 400Mi
+            cpu: 800m
+            memory: 800Mi
         stdin: true
         tty: true
         terminationMessagePath: /dev/termination-log
