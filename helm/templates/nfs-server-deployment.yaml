@@ -58,7 +58,7 @@ spec:
       labels:
         svc: harvester-nfs-server
         workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-nfs-server
-        namespace: default
+      namespace: default
     spec:
         affinity: {}
         dnsPolicy: ClusterFirst
