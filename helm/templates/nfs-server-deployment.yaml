@@ -35,12 +35,12 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: nfs-server
-    namespace: default
-    annotations:
-        field.cattle.io/description: harvester-nfs-server deployment
-    labels:
-        workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-nfs-server
+  name: nfs-server
+  namespace: default
+  annotations:
+    field.cattle.io/description: harvester-nfs-server deployment
+  labels:
+    workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-nfs-server
 spec:
     progressDeadlineSeconds: 600
     revisionHistoryLimit: 10
