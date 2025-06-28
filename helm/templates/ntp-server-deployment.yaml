@@ -1,87 +1,88 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: harvester-ntp-server
-  annotations:
-    field.cattle.io/description: harvester-ntp-server deployment
-  labels:
-    workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-ntp-server
-  namespace: default
-spec:
-  progressDeadlineSeconds: 600
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-ntp-server
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        svc: harvester-ntp-server
+    name: harvester-ntp-server
+    annotations:
+        field.cattle.io/description: harvester-ntp-server deployment
+    labels:
         workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-ntp-server
-      namespace: default
-    spec:
-      affinity: {}
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-      containers:
-      - name: harvester-base-ntp-server
-        image: dockurr/chrony:4.7
-        env:
-        - name: NTP_SERVERS
-          value: "time1.google.com,time2.google.com,time3.google.com"
-        resources:
-          requests:
-              cpu: 200m
-              memory: 200Mi
-          limits:
-              cpu: 400m
-              memory: 400Mi
-        stdin: true
-        tty: true
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        securityContext:
-            allowPrivilegeEscalation: false
-            privileged: false
-            readOnlyRootFilesystem: false
-            runAsNonRoot: false
-        ports:
-        - containerPort: 123
+    namespace: default
+spec:
+    progressDeadlineSeconds: 600
+    revisionHistoryLimit: 10
+    selector:
+        matchLabels:
+            workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-ntp-server
+    strategy:
+        rollingUpdate:
+            maxSurge: 25%
+            maxUnavailable: 25%
+        type: RollingUpdate
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                svc: harvester-ntp-server
+                workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-ntp-server
+            namespace: default
+        spec:
+            affinity: {}
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+            containers:
+              - name: harvester-base-ntp-server
+                image: dockurr/chrony:4.7
+                env:
+                  - name: NTP_SERVERS
+                    value: "time1.google.com,time2.google.com,time3.google.com"
+                resources:
+                    requests:
+                        cpu: 200m
+                        memory: 200Mi
+                    limits:
+                        cpu: 400m
+                        memory: 400Mi
+                stdin: true
+                tty: true
+                terminationMessagePath: /dev/termination-log
+                terminationMessagePolicy: File
+                securityContext:
+                    allowPrivilegeEscalation: false
+                    privileged: false
+                    readOnlyRootFilesystem: false
+                    runAsNonRoot: false
+                ports:
+                  - containerPort: 123
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloudprovider.harvesterhci.io/ipam: dhcp
-    field.cattle.io/description: ipam lb harvester-ntp-server
-  finalizers:
-    - service.kubernetes.io/load-balancer-cleanup
-  name: harvester-ntp-server-lb
-  namespace: default
+    annotations:
+        cloudprovider.harvesterhci.io/ipam: dhcp
+        field.cattle.io/description: ipam lb harvester-ntp-server
+    finalizers:
+      - service.kubernetes.io/load-balancer-cleanup
+    name: harvester-ntp-server-lb
+    namespace: default
 spec:
-  allocateLoadBalancerNodePorts: true
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-    - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-    - name: ntpserverhvstr
-      nodePort: 30123
-      port: 123
-      protocol: UDP
-      targetPort: 123
-  selector:
-    svc: harvester-ntp-server
-  sessionAffinity: None
-  type: LoadBalancer
+    allocateLoadBalancerNodePorts: true
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+      - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+      - name: ntpserverhvstr
+        nodePort: 30123
+        port: 123
+        protocol: UDP
+        targetPort: 123
+    selector:
+        svc: harvester-ntp-server
+    sessionAffinity: None
+    type: LoadBalancer
 ---
+

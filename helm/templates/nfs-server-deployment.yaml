@@ -68,34 +68,34 @@ spec:
       progressDeadlineSeconds: 600
       containers:
         - name: nfs-server
-          image: itsthenetwork/nfs-server-alpine:latest
-          env:
+            image: itsthenetwork/nfs-server-alpine:latest
+            env:
             - name: SHARED_DIRECTORY
               value: "/exports"
-          volumeMounts:
+            volumeMounts:
             - mountPath: /exports
               name: nfs-vol
             resources:
-          requests:
+            requests:
             cpu: 200m
             memory: 200Mi
-          limits:
+            limits:
             cpu: 400m
             memory: 400Mi
-          stdin: true
-          tty: true
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          securityContext:
+            stdin: true
+            tty: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            securityContext:
             privileged: true
             runAsNonRoot: false
-          ports:
+            ports:
             - name: tcp-2049
-              containerPort: 2049
-              protocol: TCP
+                containerPort: 2049
+                protocol: TCP
             - name: udp-111
-              containerPort: 111
-              protocol: UDP
+                containerPort: 111
+                protocol: UDP
       volumes:
         - name: nfs-vol
           persistentVolumeClaim:
