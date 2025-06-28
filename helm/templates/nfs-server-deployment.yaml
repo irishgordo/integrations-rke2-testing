@@ -87,8 +87,8 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         securityContext:
-        privileged: true
-        runAsNonRoot: false
+          privileged: true
+          runAsNonRoot: false
         ports:
         - name: tcp-2049
           containerPort: 2049
