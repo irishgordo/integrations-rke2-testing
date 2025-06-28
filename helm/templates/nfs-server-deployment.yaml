@@ -45,8 +45,8 @@ spec:
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 10
   selector:
-  matchLabels:
-    workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-nfs-server
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-harvester-nfs-server
   strategy:
     rollingUpdate:
       maxSurge: 25%
